@@ -1,4 +1,4 @@
-package env
+package environ
 
 // Getenver is a narrow interface exposing only Getenv
 type Getenver interface {

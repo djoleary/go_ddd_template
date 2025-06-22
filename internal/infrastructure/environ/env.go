@@ -1,5 +1,5 @@
-// Package env provides facades and interfaces for working with os env
-package env
+// Package environ provides facades and interfaces for working with os env
+package environ
 
 import "os"
 
