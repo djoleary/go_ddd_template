@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+dotenv:
+  - .env
+tasks:
+  default:
+    desc: lists all tasks
+    cmd: task --list-all
+  git:hooks:
+    desc: sets up the githooks for the project
+    cmd: git config core.hooksPath .githooks

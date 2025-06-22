@@ -1,0 +1,28 @@
+services:
+  server:
+    init: true
+    ports:
+      - ${APP_HTTP_PORT}:${APP_HTTP_PORT}
+    pull_policy: never
+    tty: false
+    stdin_open: true
+    stop_grace_period: 4s
+    image: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA:-latest}
+    build:
+      context: ..
+      dockerfile: ./build/Dockerfile
+      args:
+        - LDFLAGS=${LDFLAGS:-}
+        - GOAMD64=${GOAMD64:-}
+      tags:
+        - ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA:-latest}
+    mem_limit: ${GOMEMLIMIT}
+    environment:
+      GOMEMLIMIT: ${GOMEMLIMIT}
+      GOGC: "200"
+      GOMAXPROCS: "4"
+      APP_HTTP_ADDRESS: ${APP_HTTP_ADDRESS}
+      APP_HTTP_PORT: ${APP_HTTP_PORT}
+      APP_HTTP_LOG_LEVEL: ${APP_HTTP_LOG_LEVEL}
+    extra_hosts:
+      - host.docker.internal:host-gateway
