@@ -9,3 +9,9 @@ tasks:
   git:hooks:
     desc: sets up the githooks for the project
     cmd: git config core.hooksPath .githooks
+
+  go:build:
+    cmd: go build -o="bin/" -v ./...
+
+  go:test:
+    cmd: go test -v ./...
