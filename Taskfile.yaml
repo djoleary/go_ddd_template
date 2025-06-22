@@ -43,6 +43,12 @@ tasks:
     cmds:
       - cmd: docker compose config
       - cmd: docker compose build
+  docker:up:
+    desc: run docker container
+    cmd: docker compose up -d
+  docker:down:
+    desc: run docker container
+    cmd: docker compose down -v
   lint:
     desc: run various linters
     cmds:

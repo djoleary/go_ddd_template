@@ -15,9 +15,7 @@ import (
 )
 
 func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatalf("error loading .env file: %v", err)
-	}
+	_ = godotenv.Load() // We don't care if this fails
 
 	stderr := os.Stderr
 	env := environ.NewOSEnv()
