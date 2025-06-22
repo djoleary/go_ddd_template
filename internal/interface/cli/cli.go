@@ -22,6 +22,6 @@ func NewCLI(logger slog.Logger, env environ.Getenver, rootCmd cobra.Command) *cl
 	return c
 }
 
-func (c *cli) Execute() error {
+func (c *cli) Serve() error {
 	return c.rootCmd.Execute()
 }

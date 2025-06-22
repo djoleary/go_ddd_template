@@ -8,7 +8,7 @@ import (
 
 	"github.com/djoleary/go_ddd_template/internal/infrastructure/environ"
 	"github.com/djoleary/go_ddd_template/internal/infrastructure/slog"
-	"github.com/djoleary/go_ddd_template/internal/interfaces/cli"
+	"github.com/djoleary/go_ddd_template/internal/interface/cli"
 	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
 )
@@ -42,7 +42,7 @@ func run(stdin io.Reader, stdout, stderr io.Writer, env environ.Getenver, args [
 
 	c := cli.NewCLI(*slog, env, *rootCmd)
 
-	if err := c.Execute(); err != nil {
+	if err := c.Serve(); err != nil {
 		return fmt.Errorf("cli error: %w", err)
 	}
 
