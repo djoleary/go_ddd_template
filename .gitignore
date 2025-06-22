@@ -23,10 +23,14 @@ profile.cov
 go.work
 go.work.sum
 
+# Temporary files
+tmp/
+
 # env file
 .env
 
 .direnv/
+.task/
 
 # Editor/IDE
 # .idea/

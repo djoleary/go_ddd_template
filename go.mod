@@ -4,11 +4,16 @@ go 1.24.4
 
 replace github.com/djoleary/go_ddd_template => ./
 
-tool github.com/outrigdev/outrig
+tool golang.org/x/pkgsite/cmd/pkgsite
 
 require (
-	github.com/google/uuid v1.6.0 // indirect
-	github.com/outrigdev/outrig v0.8.2 // indirect
-	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/term v0.29.0 // indirect
+	github.com/google/licensecheck v0.3.1 // indirect
+	github.com/google/safehtml v0.0.3-0.20211026203422-d6f0e11a5516 // indirect
+	golang.org/x/mod v0.25.0 // indirect
+	golang.org/x/net v0.41.0 // indirect
+	golang.org/x/pkgsite v0.0.0-20250611185244-041c7c0b878c // indirect
+	golang.org/x/sync v0.15.0 // indirect
+	golang.org/x/text v0.26.0 // indirect
+	golang.org/x/tools v0.34.0 // indirect
+	rsc.io/markdown v0.0.0-20231214224604-88bb533a6020 // indirect
 )

@@ -1,1 +1,3 @@
-# go_ddd_template
+# Go DDD Template
+
+
