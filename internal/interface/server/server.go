@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/djoleary/go_ddd_template/internal/infrastructure/environ"
 	"github.com/labstack/echo"
@@ -29,5 +30,14 @@ func (s *server) Serve() error {
 		port = "8080"
 	}
 
-	return s.webserver.Start(fmt.Sprintf("%s:%s", addr, port))
+	hs := http.Server{
+		Addr:    fmt.Sprintf("%s:%s", addr, port),
+		Handler: s,
+	}
+
+	return hs.ListenAndServe()
+}
+
+func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	s.webserver.ServeHTTP(w, r)
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/djoleary/go_ddd_template/internal/infrastructure/environ"
@@ -36,7 +37,7 @@ func run(stderr io.Writer, env environ.Getenver) error {
 
 	s := server.NewServer(env, ws)
 
-	if err := s.Serve(); err != nil {
+	if err := s.Serve(); err != http.ErrServerClosed {
 		return fmt.Errorf("server error: %w", err)
 	}
 
