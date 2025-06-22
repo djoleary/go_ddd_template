@@ -1,0 +1,1 @@
+# go_ddd_template
