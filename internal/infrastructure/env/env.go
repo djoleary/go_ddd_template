@@ -1,7 +1,9 @@
+// Package env provides facades and interfaces for working with os env
 package env
 
 import "os"
 
+// OSEnv is a facade for os env
 type OSEnv struct{}
 
 func NewOSEnv() OSEnv {
