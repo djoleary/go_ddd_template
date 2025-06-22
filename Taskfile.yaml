@@ -1,5 +1,7 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: "3"
+dotenv:
+  - .env
 env:
   CGO_ENABLED: 0
   COMPOSE_FILE: build/docker-compose.yaml
