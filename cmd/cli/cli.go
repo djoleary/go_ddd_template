@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"strings"
@@ -10,16 +11,19 @@ import (
 )
 
 func main() {
+	stdin := os.Stdin
+	stdout := os.Stdout
+	stderr := os.Stderr
 	args := os.Args[1:]
 
-	if err := run(args); err != nil {
+	if err := run(stdin, stdout, stderr, args); err != nil {
 		log.Fatalf("runtime error: %v", err)
 	}
 }
 
 // run is used in place of main as it is a normal go function that can return an error.
 // having explicit inputs also allows for easier testing of the whole application.
-func run(args []string) error {
+func run(stdin io.Reader, stdout, stderr io.Writer, args []string) error {
 	cmds := []*cobra.Command{
 		{
 			Use:   "echo [string to echo]",
@@ -33,6 +37,9 @@ func run(args []string) error {
 	}
 
 	rootCmd := &cobra.Command{Use: "cli"}
+	rootCmd.SetIn(stdin)
+	rootCmd.SetOut(stdout)
+	rootCmd.SetErr(stderr)
 	rootCmd.SetArgs(args)
 	rootCmd.AddCommand(cmds...)
 
