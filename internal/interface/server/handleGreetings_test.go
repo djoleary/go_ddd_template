@@ -22,7 +22,7 @@ func (e testEnv) Getenv(k string) string {
 	return ""
 }
 
-func TestHandleGreetings(t *testing.T) {
+func TestGreetingEndpoint(t *testing.T) {
 	t.Parallel()
 
 	tests := map[string]struct {
@@ -56,12 +56,4 @@ func TestHandleGreetings(t *testing.T) {
 			assert.Equal(t, test.expected, string(body))
 		})
 	}
-}
-
-func TestHandleGreeting(t *testing.T) {
-	t.Parallel()
-}
-
-func TestHandleGreetingByName(t *testing.T) {
-	t.Parallel()
 }

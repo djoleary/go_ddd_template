@@ -10,7 +10,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestHandleHealthcheck(t *testing.T) {
+func TestHealthcheckEndpoint(t *testing.T) {
+	t.Parallel()
+
 	mockEnv := testEnv{}
 	ws := echo.New()
 	s := server.NewServer(mockEnv, ws)
