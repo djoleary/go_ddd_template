@@ -22,19 +22,20 @@ func TestRun(t *testing.T) {
 	t.Parallel()
 
 	tests := map[string]struct {
-		cmd       string
-		args      []string
-		expectErr bool
+		args     []string
+		expected string
 	}{
-		"empty echo": {
-			cmd:       "echo",
-			args:      []string{"echo"},
-			expectErr: true,
+		"greet": {
+			args:     []string{"greet"},
+			expected: "hello world!\n",
 		},
-		"echo 'hello world'": {
-			cmd:       "echo",
-			args:      []string{"echo", "hello", "world"},
-			expectErr: false,
+		"greet 'ted'": {
+			args:     []string{"greet", "ted"},
+			expected: "hello ted!\n",
+		},
+		"greet 'ted' 'bob'": {
+			args:     []string{"greet", "ted", "bob"},
+			expected: "hello ted and bob!\n",
 		},
 	}
 
@@ -47,11 +48,8 @@ func TestRun(t *testing.T) {
 
 			err := run(mockIn, mockOut, mockErr, mockEnv, test.args)
 
-			if test.expectErr == true {
-				assert.Error(t, err)
-			} else {
-				assert.Nil(t, err)
-			}
+			assert.Nil(t, err)
+			assert.Equal(t, test.expected, mockOut.String())
 		})
 	}
 }
