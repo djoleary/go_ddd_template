@@ -7,6 +7,7 @@ replace github.com/djoleary/go_ddd_template => ./
 tool golang.org/x/pkgsite/cmd/pkgsite
 
 require (
+	github.com/joho/godotenv v1.5.1
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
 )

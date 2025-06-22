@@ -7,6 +7,17 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+type testEnv struct {
+	pairs map[string]string
+}
+
+func (e testEnv) Getenv(k string) string {
+	if v, ok := e.pairs[k]; ok {
+		return v
+	}
+	return ""
+}
+
 func TestRun(t *testing.T) {
 	t.Parallel()
 
@@ -32,8 +43,9 @@ func TestRun(t *testing.T) {
 			mockIn := new(bytes.Buffer)
 			mockOut := new(bytes.Buffer)
 			mockErr := new(bytes.Buffer)
+			mockEnv := testEnv{}
 
-			err := run(mockIn, mockOut, mockErr, test.args)
+			err := run(mockIn, mockOut, mockErr, mockEnv, test.args)
 
 			if test.expectErr == true {
 				assert.Error(t, err)
