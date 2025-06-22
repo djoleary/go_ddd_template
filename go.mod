@@ -6,9 +6,13 @@ replace github.com/djoleary/go_ddd_template => ./
 
 tool golang.org/x/pkgsite/cmd/pkgsite
 
+require github.com/spf13/cobra v1.9.1
+
 require (
 	github.com/google/licensecheck v0.3.1 // indirect
 	github.com/google/safehtml v0.0.3-0.20211026203422-d6f0e11a5516 // indirect
+	github.com/inconshreveable/mousetrap v1.1.0 // indirect
+	github.com/spf13/pflag v1.0.6 // indirect
 	golang.org/x/mod v0.25.0 // indirect
 	golang.org/x/net v0.41.0 // indirect
 	golang.org/x/pkgsite v0.0.0-20250611185244-041c7c0b878c // indirect
