@@ -43,12 +43,12 @@ func TestHandleGreetings(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			mockEnv := testEnv{}
 			ws := echo.New()
-			srv := server.NewServer(mockEnv, ws)
+			s := server.NewServer(mockEnv, ws)
 
 			w := httptest.NewRecorder()
 			r := httptest.NewRequest("GET", test.path, nil)
 
-			srv.ServeHTTP(w, r)
+			s.ServeHTTP(w, r)
 
 			assert.Equal(t, http.StatusOK, w.Result().StatusCode)
 
