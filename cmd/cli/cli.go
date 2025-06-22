@@ -5,10 +5,10 @@ import (
 	"io"
 	"log"
 	"os"
-	"strings"
 
 	"github.com/djoleary/go_ddd_template/internal/infrastructure/env"
 	"github.com/djoleary/go_ddd_template/internal/infrastructure/slog"
+	"github.com/djoleary/go_ddd_template/internal/interfaces/cli"
 	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
 )
@@ -34,32 +34,16 @@ func main() {
 func run(stdin io.Reader, stdout, stderr io.Writer, env env.Getenver, args []string) error {
 	slog := slog.NewJsonLogger(stderr, env.Getenv("APP_LOG_LEVEL"))
 
-	cmds := []*cobra.Command{
-		{
-			Use:   "echo [string to echo]",
-			Short: "Echo anything",
-			Long:  "echo is for echoing back whatever you want",
-			Args:  cobra.MinimumNArgs(1),
-			RunE: func(cmd *cobra.Command, args []string) error {
-				slog.Debug("Echoing")
-				if _, err := fmt.Fprintln(stdout, "Echo: "+strings.Join(args, " ")); err != nil {
-					return err
-				}
-				slog.Debug("Echoed")
-				return nil
-			},
-		},
-	}
-
 	rootCmd := &cobra.Command{Use: "cli"}
 	rootCmd.SetIn(stdin)
 	rootCmd.SetOut(stdout)
 	rootCmd.SetErr(stderr)
 	rootCmd.SetArgs(args)
-	rootCmd.AddCommand(cmds...)
 
-	if err := rootCmd.Execute(); err != nil {
-		return fmt.Errorf("cobra error: %w", err)
+	c := cli.NewCLI(*slog, *rootCmd)
+
+	if err := c.Execute(); err != nil {
+		return fmt.Errorf("cli error: %w", err)
 	}
 
 	return nil
