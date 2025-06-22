@@ -26,6 +26,8 @@ if [ -n "$STAGED_FILES" ]; then
         echo "❌ go vet failed"
         exit 1
     fi
+else
+    echo "⏭️ Nothing to lint, skipping..."
 fi
 
 echo "🎉 Pre-commit checks completed successfully!"
