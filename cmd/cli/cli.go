@@ -31,6 +31,7 @@ func main() {
 // having explicit inputs also allows for easier testing of the whole application.
 func run(stdin io.Reader, stdout, stderr io.Writer, env environ.Getenver, args []string) error {
 	slog := slog.NewJsonLogger(stderr, env.Getenv("APP_LOG_LEVEL"))
+	slog.SetAsDefault()
 
 	rootCmd := &cobra.Command{Use: "cli"}
 	rootCmd.SetIn(stdin)

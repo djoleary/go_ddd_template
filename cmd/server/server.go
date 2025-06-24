@@ -9,6 +9,7 @@ import (
 
 	"github.com/djoleary/go_ddd_template/internal/infrastructure/environ"
 	"github.com/djoleary/go_ddd_template/internal/infrastructure/gommon"
+	"github.com/djoleary/go_ddd_template/internal/infrastructure/slog"
 	"github.com/djoleary/go_ddd_template/internal/interface/server"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
@@ -28,6 +29,9 @@ func main() {
 // run is used in place of main as it is a normal go function that can return an error.
 // having explicit inputs also allows for easier testing of the whole application.
 func run(stderr io.Writer, env environ.Getenver) error {
+	slog := slog.NewJsonLogger(stderr, env.Getenv("APP_LOG_LEVEL"))
+	slog.SetAsDefault()
+
 	ws := echo.New()
 	ws.Logger.SetLevel(gommon.GetLevel(env.Getenv("APP_LOG_LEVEL")))
 	ws.Logger.SetOutput(stderr)

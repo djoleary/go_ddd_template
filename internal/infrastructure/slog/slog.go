@@ -51,3 +51,7 @@ func (l *Logger) Warn(msg string, args ...any) {
 func (l *Logger) Error(msg string, args ...any) {
 	l.slog.Error(msg, args...)
 }
+
+func (l *Logger) SetAsDefault() {
+	slog.SetDefault(l.slog)
+}
