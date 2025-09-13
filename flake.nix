@@ -33,7 +33,7 @@
             # Build
             docker-compose
 
-            # Tools
+            # Dev
             go-task
             golangci-lint
             outrig
