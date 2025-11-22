@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Pre-commit hook - fast checks only
-# dependencies: php git bash grep xargs composer
 
 set -e
 
@@ -12,31 +11,15 @@ if git diff --cached --quiet; then
     exit 0
 fi
 
-# Lint only staged files
-echo "📝 Linting staged files..."
+# Lint files
+echo "📝 Linting files..."
 
-# Get staged Go files
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.go$' || true)
-
-if [ -n "$STAGED_FILES" ]; then
-    # Run Go linting on staged files
-    go vet ./...
-    if [ $? -eq 0 ]; then
-        echo "✅ go vet passed"
-    else
-        echo "❌ go vet failed"
-        exit 1
-    fi
-
-    golangci-lint run ./...
-    if [ $? -eq 0 ]; then
-        echo "✅ golangci-lint passed"
-    else
-        echo "❌ golangci-lint failed"
-        exit 1
-    fi
+task lint
+if [ $? -eq 0 ]; then
+    echo "✅ lint passed"
 else
-    echo "⏭️ Nothing to lint, skipping..."
+    echo "❌ lint failed"
+    exit 1
 fi
 
 echo "🎉 Pre-commit checks completed successfully!"

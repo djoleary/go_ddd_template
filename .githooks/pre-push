@@ -6,7 +6,7 @@ set -e
 echo "🧪 Running tests before push..."
 
 # Run the full test suite
-go test ./...
+task test
 
 if [ $? -eq 0 ]; then
     echo "✅ All tests passed! Push allowed."
